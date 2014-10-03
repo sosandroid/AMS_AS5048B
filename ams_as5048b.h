@@ -54,11 +54,6 @@
 #define _AMS_AS5048B_H_
 
 
-
-
-//loads defines & consts
-//#include <ams_as5048b_const>
-
 // OPERATIONS
 #define SERIAL_DEBUG_ENABLED
 #define USE_WIREBEGIN_ENABLED // to comment if Wire.begin() function is called in Setup() for instance. Usefull to manage one or several I2C devices in the same sketch
@@ -80,11 +75,11 @@
 
 // Moving Exponential Average on angle - beware heavy calculation for some Arduino boards
 // This is a 1st order low pass filter
-// Moving average is calculated on Sine et Cosine values of the angle to provide an extrapolated accurate angle value
+// Moving average is calculated on Sine et Cosine values of the angle to provide an extrapolated accurate angle value.
 #define EXP_MOVAVG_N 5	//history length impact on moving average impact - keep in mind the moving average will be impacted by the measurement frequency too
 #define EXP_MOVAVG_LOOP 1 //number of measurements before starting mobile Average - starting with a simple average - 1 allows a quick start. Value must be 1 minimum
 
-//unit consts
+//unit consts - just to make the units more readable
 #define U_RAW 1
 #define U_TRN 2
 #define U_DEG 3

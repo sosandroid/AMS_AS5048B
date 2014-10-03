@@ -12,13 +12,6 @@
 */
 /**************************************************************************/
 
-/**************************************************************************/
-/*!
-	Il semblerait que l'initialisation de l'objet FRAM en dehors de la fonction setup plante le programme
-	Ce même objet initialisé dans la fonction setup n'est pas accessible d'ailleurs...
-*/
-/**************************************************************************/
-
 #include <ams_as5048b.h>
 
 AMS_AS5048B mysensor;
