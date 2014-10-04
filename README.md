@@ -21,8 +21,8 @@ This library deals only with the I2C channel
 
 ## Code examples ##
 - Single angle reading, outputs 2 units
-- Anglular exponential moving average reading
-- Wind vane
+- Angular exponential moving average reading, outputs read angle and average
+- Wind vane, outputs azimuth and compass direction
 
 ## Not available yet features ##
 - PWM reading
