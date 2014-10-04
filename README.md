@@ -19,6 +19,11 @@ This library deals only with the I2C channel
 - Reads exponential moving average angle and outputting with various units
 - Resets Exp moving Avg
 
+## Code examples ##
+- Single angle reading, outputs 2 units
+- Anglular exponential moving average reading
+- Wind vane
+
 ## Not available yet features ##
 - PWM reading
 - OTP setting
