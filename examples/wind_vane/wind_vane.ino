@@ -138,12 +138,12 @@ char* degreeToCompass(double angle) {
 
 #else
 
-	void updateAvg (void *context) {
+	void updateAvg (void) {
 	  mysensor.updateMovingAvgExp();
 	  return;
 	}
 	
-	void printWindDir(void *context) {
+	void printWindDir(void) {
 	
 		//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
 		double angle = mysensor.getMovingAvgExp(U_DEG);
