@@ -6,6 +6,7 @@
     @section  HISTORY
 
     v1.0 - First release
+	v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h)
 
     Library to interface the AS5048B magnetic rotary encoder from AMS over the I2C bus
 	
@@ -46,7 +47,7 @@
  #include <WProgram.h>
 #endif
 
-#include <Math.h>
+#include <math.h>
 #include <Wire.h>
 
 

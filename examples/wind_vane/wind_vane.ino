@@ -13,11 +13,13 @@
     @section  HISTORY
 
     v1.0 - First release
+    v1.0.1 - Code modification to comply with Timer.h used by Codebender.cc vs https://github.com/JChristensen/Timer
 */
 /**************************************************************************/
 
+#define CODEBENDER
 
-#include <ams_as5048b.h>
+#include "ams_as5048b.h"
 #include <Wire.h>
 #include <Timer.h>
 #include <math.h>
@@ -62,9 +64,16 @@ void setup() {
     
     //set sensor's North position - depending on your setting
     mysensor.zeroRegW(NORTH); //needed only once ever
-	
+
+#ifdef CODEBENDER
+	//To comply with the Timer.h lib used by codebender.cc
+	mytimer.every(1000, updateAvg, (void*)0); //updates angular Exp moving average every second
+	mytimer.every(5000, printWindDir, (void*)0); //outputs to serial wind direction every 5 seconds
+#else
+	//To comply https://github.com/JChristensen/Timer
 	mytimer.every(1000, updateAvg); //updates angular Exp moving average every second
 	mytimer.every(5000, printWindDir); //outputs to serial wind direction every 5 seconds
+#endif
     
 }
 
@@ -74,10 +83,6 @@ void loop() {
 
 }
 
-void updateAvg (void) {
-  mysensor.updateMovingAvgExp();
-  return;
-}
 
 char* degreeToCompass(double angle) {
 	//working with angles in degree
@@ -104,20 +109,56 @@ char* degreeToCompass(double angle) {
 	return "ERROR";
 }
 
-void printWindDir(void) {
+#ifdef CODEBENDER
+//Quick fix to get the example compiling against Timer.h used by Codebender
+//Dirty one, but not time to make it smarter
 
-	//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
-	double angle = mysensor.getMovingAvgExp(U_DEG);
+	void updateAvg (void *context) {
+	  mysensor.updateMovingAvgExp();
+	  return;
+	}
 	
-	char* compassDir[6];
-    compassDir[6]  = degreeToCompass(angle);
+	void printWindDir(void *context) {
 	
-	Serial.println("Wind direction");
-	Serial.print("Degree: ");
-	Serial.println(angle, DEC);
-	Serial.print("Compass: ");
-	Serial.println(compassDir[6]);
-	Serial.println("----");
+		//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
+		double angle = mysensor.getMovingAvgExp(U_DEG);
+		
+		char* compassDir[6];
+	    compassDir[6]  = degreeToCompass(angle);
+		
+		Serial.println("Wind direction");
+		Serial.print("Degree: ");
+		Serial.println(angle, DEC);
+		Serial.print("Compass: ");
+		Serial.println(compassDir[6]);
+		Serial.println("----");
+		
+		return;
+	}
+
+#else
+
+	void updateAvg (void *context) {
+	  mysensor.updateMovingAvgExp();
+	  return;
+	}
 	
-	return;
-}
+	void printWindDir(void *context) {
+	
+		//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
+		double angle = mysensor.getMovingAvgExp(U_DEG);
+		
+		char* compassDir[6];
+	    compassDir[6]  = degreeToCompass(angle);
+		
+		Serial.println("Wind direction");
+		Serial.print("Degree: ");
+		Serial.println(angle, DEC);
+		Serial.print("Compass: ");
+		Serial.println(compassDir[6]);
+		Serial.println("----");
+		
+		return;
+	}
+
+#endif

@@ -9,11 +9,12 @@
     @section  HISTORY
 
     v1.0 - First release
+	v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h)
 */
 /**************************************************************************/
 
 #include <stdlib.h>
-#include <Math.h>
+#include <math.h>
 #include <Wire.h>
 #include "ams_as5048b.h"
 
