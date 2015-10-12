@@ -17,9 +17,9 @@
 */
 /**************************************************************************/
 
-#define CODEBENDER
+//#define CODEBENDER //comment if used in the Arduino IDE - deals with the Timer.h compatibility.
 
-#include "ams_as5048b.h"
+#include <ams_as5048b.h>
 #include <Wire.h>
 #include <Timer.h>
 #include <math.h>
@@ -137,6 +137,7 @@ char* degreeToCompass(double angle) {
 	}
 
 #else
+//Code for Arduino IDE
 
 	void updateAvg (void) {
 	  mysensor.updateMovingAvgExp();
