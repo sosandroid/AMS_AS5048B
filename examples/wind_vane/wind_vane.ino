@@ -79,9 +79,7 @@ void setup() {
 }
 
 void loop() {
-
 	mytimer.update(); // updates the timer to trigger proper functions
-
 }
 
 
@@ -105,14 +103,14 @@ char* degreeToCompass(double angle) {
 	else if (angle < 303.75) return "WNW";		// ONO
 	else if (angle < 326.25) return "NW";		// NO
 	else if (angle < 348.75) return "NNW";		// NNO
-	else return "N";							// N
+	else if (angle < 360.0) return "N";			// N
 
 	return "ERROR";
 }
 
 void updateAvg (void) {
-  mysensor.updateMovingAvgExp();
-  return;
+	mysensor.updateMovingAvgExp();
+	return;
 }
 
 void printWindDir(void) {
@@ -139,8 +137,8 @@ void printWindDir(void) {
 //Dirty one, but not time to make it smarter
 
 	void updateAvg_alt (void *context) {
-	  updateAvg();
-	  return;
+		updateAvg();
+		return;
 	}
 	
 	void printWindDir_alt(void *context) {
