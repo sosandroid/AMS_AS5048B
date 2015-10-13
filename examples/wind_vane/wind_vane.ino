@@ -14,10 +14,11 @@
 
     v1.0 - First release
     v1.0.1 - Code modification to comply with Timer.h used by Codebender.cc vs https://github.com/JChristensen/Timer
+	v1.0.2 - remove duplicate code for Timer.h supported by Codebender.cc
 */
 /**************************************************************************/
 
-//#define CODEBENDER //comment if used in the Arduino IDE - deals with the Timer.h compatibility.
+#define CODEBENDER //comment if used in the Arduino IDE - deals with the Timer.h compatibility.
 
 #include <ams_as5048b.h>
 #include <Wire.h>
@@ -67,8 +68,8 @@ void setup() {
 
 #ifdef CODEBENDER
 	//To comply with the Timer.h lib used by codebender.cc
-	mytimer.every(1000, updateAvg, (void*)0); //updates angular Exp moving average every second
-	mytimer.every(5000, printWindDir, (void*)0); //outputs to serial wind direction every 5 seconds
+	mytimer.every(1000, updateAvg_alt, (void*)0); //updates angular Exp moving average every second
+	mytimer.every(5000, printWindDir_alt, (void*)0); //outputs to serial wind direction every 5 seconds
 #else
 	//To comply https://github.com/JChristensen/Timer
 	mytimer.every(1000, updateAvg); //updates angular Exp moving average every second
@@ -109,56 +110,41 @@ char* degreeToCompass(double angle) {
 	return "ERROR";
 }
 
+void updateAvg (void) {
+  mysensor.updateMovingAvgExp();
+  return;
+}
+
+void printWindDir(void) {
+
+	//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
+	double angle = mysensor.getMovingAvgExp(U_DEG);
+	
+	char* compassDir[6];
+	compassDir[6]  = degreeToCompass(angle);
+	
+	Serial.println("Wind direction");
+	Serial.print("Degree: ");
+	Serial.println(angle, DEC);
+	Serial.print("Compass: ");
+	Serial.println(compassDir[6]);
+	Serial.println("----");
+	
+	return;
+}
+
+
 #ifdef CODEBENDER
 //Quick fix to get the example compiling against Timer.h used by Codebender
 //Dirty one, but not time to make it smarter
 
-	void updateAvg (void *context) {
-	  mysensor.updateMovingAvgExp();
+	void updateAvg_alt (void *context) {
+	  updateAvg();
 	  return;
 	}
 	
-	void printWindDir(void *context) {
-	
-		//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
-		double angle = mysensor.getMovingAvgExp(U_DEG);
-		
-		char* compassDir[6];
-	    compassDir[6]  = degreeToCompass(angle);
-		
-		Serial.println("Wind direction");
-		Serial.print("Degree: ");
-		Serial.println(angle, DEC);
-		Serial.print("Compass: ");
-		Serial.println(compassDir[6]);
-		Serial.println("----");
-		
-		return;
-	}
-
-#else
-//Code for Arduino IDE
-
-	void updateAvg (void) {
-	  mysensor.updateMovingAvgExp();
-	  return;
-	}
-	
-	void printWindDir(void) {
-	
-		//double angle = (trunc(mysensor.getMovingAvgExp(U_DEG) * 100.0)) / 100.0 ; //rounds to 2 decimal - almost useless
-		double angle = mysensor.getMovingAvgExp(U_DEG);
-		
-		char* compassDir[6];
-	    compassDir[6]  = degreeToCompass(angle);
-		
-		Serial.println("Wind direction");
-		Serial.print("Degree: ");
-		Serial.println(angle, DEC);
-		Serial.print("Compass: ");
-		Serial.println(compassDir[6]);
-		Serial.println("----");
-		
+	void printWindDir_alt(void *context) {
+		printWindDir();
 		return;
 	}
 
