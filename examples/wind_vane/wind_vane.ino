@@ -15,6 +15,7 @@
     v1.0 - First release
     v1.0.1 - Code modification to comply with Timer.h used by Codebender.cc vs https://github.com/JChristensen/Timer
 	v1.0.2 - remove duplicate code for Timer.h supported by Codebender.cc
+	v1.0.3 - Azimuth calculation robustness / error handling
 */
 /**************************************************************************/
 
@@ -87,7 +88,8 @@ char* degreeToCompass(double angle) {
 	//working with angles in degree
 	//returns one of the 16 compass azimuth
 												//French
-	if (angle < 11.25) return "N";				// N
+	if (angle < 0.0) return "ERROR";
+	else if (angle < 11.25) return "N";			// N
 	else if (angle < 33.75) return "NNE";		// NNE
 	else if (angle < 56.25) return "NE";		// NE
 	else if (angle < 78.75) return "ENE";		// ENE
@@ -103,7 +105,7 @@ char* degreeToCompass(double angle) {
 	else if (angle < 303.75) return "WNW";		// ONO
 	else if (angle < 326.25) return "NW";		// NO
 	else if (angle < 348.75) return "NNW";		// NNO
-	else if (angle < 360.0) return "N";			// N
+	else if (angle <= 360.0) return "N";		// N
 
 	return "ERROR";
 }
