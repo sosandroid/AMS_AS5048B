@@ -3,6 +3,7 @@ Arduino library for AS5048B from AMS
 
 	v1.0 - First release
 	v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h) + Wind vane example modification to comply with the Timer.h lib used by them
+	v1.0.2 - ams_as5048b.cpp - fix setZeroReg() issue raised by @MechatronicsWorkman
 
 AS5048B is a 14-bit magnetic rotary position sensor with digital angle (I2C) and PWM output.
 This library deals only with the I2C channel
