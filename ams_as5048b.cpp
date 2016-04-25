@@ -10,6 +10,7 @@
 
     v1.0 - First release
 	v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h)
+	v1.0.2 - setZeroReg() issue raised by @MechatronicsWorkman
 */
 /**************************************************************************/
 
@@ -184,6 +185,7 @@ uint8_t AMS_AS5048B::addressRegR(void) {
 void AMS_AS5048B::setZeroReg(void) {
 	
 	uint16_t zero = AMS_AS5048B::readReg16(AS5048B_ANGLMSB_REG);
+	AMS_AS5048B::zeroRegW((uint16_t) 0x0); //Issue closed by MechatronicsWorkman 
 	AMS_AS5048B::zeroRegW(zero);
 	return;
 }
