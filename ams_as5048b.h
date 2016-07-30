@@ -105,9 +105,10 @@ class AMS_AS5048B {
 	void		toggleDebug(void); // start / stop debug through serial at anytime
 	void		setClockWise(boolean cw); //set clockwise counting, default is false (native sensor)
 	void		progRegister(uint8_t regVal); //nothing so far - manipulate the OTP register
-	void		doProg(void); //nothing so far - Progress programming OTP
-	void		addressRegW(uint8_t regVal); //Change chip address
-	uint8_t		addressRegR(void); // read chip address
+	void		doProg(void); //progress programming OTP (not implemented)
+    uint8_t		chipAddress; //the address of the current sensor
+	void		addressRegW(uint8_t regVal); //change the chip address (not implemented)
+	uint8_t		addressRegR(void); //read chip address
 	void		setZeroReg(void); //set Zero to current angle position
 	void		zeroRegW(uint16_t regVal); //write Zero register value
 	uint16_t	zeroRegR(void); //read Zero register value
@@ -127,7 +128,6 @@ class AMS_AS5048B {
 	//variables
 	boolean		_debugFlag;
 	boolean		_clockWise;
-	uint8_t		_chipAddress;
 	uint8_t		_addressRegVal;
 	uint16_t	_zeroRegVal;
 	double		_lastAngleRaw;

@@ -30,13 +30,13 @@
 /**************************************************************************/
 AMS_AS5048B::AMS_AS5048B(void) 
 {
-	_chipAddress = AS5048_ADDRESS;
+	chipAddress = AS5048_ADDRESS;
 	_debugFlag = false;
 }
 
 AMS_AS5048B::AMS_AS5048B(uint8_t chipAddress) 
 {
-	_chipAddress = chipAddress;	
+	chipAddress = chipAddress;	
 	_debugFlag = false;
 }
 
@@ -378,11 +378,11 @@ uint8_t AMS_AS5048B::readReg8(uint8_t address) {
 	byte requestResult;
 	uint8_t nbByte2Read = 1;
 	
-	Wire.beginTransmission(_chipAddress);
+	Wire.beginTransmission(chipAddress);
 	Wire.write(address);
 	requestResult = Wire.endTransmission(false);
 
-	Wire.requestFrom(_chipAddress, nbByte2Read);
+	Wire.requestFrom(chipAddress, nbByte2Read);
 	readValue = (uint8_t) Wire.read();
 	
 	return readValue;
@@ -396,11 +396,11 @@ uint16_t AMS_AS5048B::readReg16(uint8_t address) {
 	byte readArray[2];
 	uint16_t readValue = 0;
 	
-	Wire.beginTransmission(_chipAddress);
+	Wire.beginTransmission(chipAddress);
 	Wire.write(address);
 	requestResult = Wire.endTransmission(false);
 	
-	Wire.requestFrom(_chipAddress, nbByte2Read);
+	Wire.requestFrom(chipAddress, nbByte2Read);
 	for (byte i=0; i < nbByte2Read; i++) {
 		readArray[i] = Wire.read();
 	}
@@ -417,7 +417,7 @@ uint16_t AMS_AS5048B::readReg16(uint8_t address) {
 
 void AMS_AS5048B::writeReg(uint8_t address, uint8_t value) {
 
-	Wire.beginTransmission(_chipAddress);
+	Wire.beginTransmission(chipAddress);
 	Wire.write(address);
 	Wire.write(value);
 	Wire.endTransmission();
