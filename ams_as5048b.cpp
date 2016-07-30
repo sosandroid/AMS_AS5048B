@@ -382,7 +382,7 @@ uint8_t AMS_AS5048B::readReg8(uint8_t address) {
 	Wire.write(address);
 	requestResult = Wire.endTransmission(false);
     if (requestResult){
-        Serial.print("I2C error:");
+        Serial.print("I2C error: ");
         Serial.println(requestResult);
     }
 
@@ -404,7 +404,7 @@ uint16_t AMS_AS5048B::readReg16(uint8_t address) {
 	Wire.write(address);
 	requestResult = Wire.endTransmission(false);
     if (requestResult){
-        Serial.print("I2C error:");
+        Serial.print("I2C error: ");
         Serial.println(requestResult);
     }
 
