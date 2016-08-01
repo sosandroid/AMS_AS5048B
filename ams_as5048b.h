@@ -105,16 +105,15 @@ class AMS_AS5048B {
 	void		toggleDebug(void); // start / stop debug through serial at anytime
 	void		setClockWise(boolean cw); //set clockwise counting, default is false (native sensor)
 	void		progRegister(uint8_t regVal); //nothing so far - manipulate the OTP register
-	void		doProg(void); //nothing so far - Proges programmation of OTP
-	void		addressRegW(uint8_t regVal); //Change chip address
-	uint8_t		addressRegR(void); // read chip address
+	void		doProg(void); //progress programming OTP (not implemented)
+	void		addressRegW(uint8_t regVal); //change the chip address (not implemented)
+	uint8_t		addressRegR(void); //read chip address
 	void		setZeroReg(void); //set Zero to current angle position
 	void		zeroRegW(uint16_t regVal); //write Zero register value
 	uint16_t	zeroRegR(void); //read Zero register value
 	uint16_t	angleRegR(void); //read raw value of the angle register
-	uint8_t		autoGainR(void); //read auto gain register
 	uint8_t		diagR(void); //read diagnostic register
-	uint16_t	magnitudeR(void); //read current mangnitude
+	uint16_t	magnitudeR(void); //read current magnitude
 	double		angleR(int unit, boolean newVal); //Read current angle or get last measure with unit conversion : RAW, TRN, DEG, RAD, GRAD, MOA, SOA, MILNATO, MILSE, MILRU	
 	uint8_t		getAutoGain(void);
 	uint8_t		getDiagReg(void);

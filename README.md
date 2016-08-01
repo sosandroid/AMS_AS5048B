@@ -25,6 +25,7 @@ This library deals only with the I2C channel
 - Single angle reading, outputs 2 units
 - Angular exponential moving average reading, outputs read angle and average
 - Wind vane, outputs azimuth and compass direction - This one as a special #define for Codebender.cc support
+- Dial reading for X-Plane
 
 ## Not available yet features ##
 - PWM reading
@@ -35,5 +36,6 @@ This library deals only with the I2C channel
 ## Testing ##
 - Tested against AS5048B's official [adapter board](http://www.ams.com/eng/Support/Demoboards/Position-Sensors/Rotary-Magnetic-Position-Sensors/AS5048B-Adapterboard)
 - Tested on Arduino Mega with Arduino IDE 1.0.5 && Codebender.cc
+- Tested on Teensy++ 2.0 with Arduino IDE 1.6.9
 - Please comment about other devices
 
