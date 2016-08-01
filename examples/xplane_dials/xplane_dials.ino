@@ -5,7 +5,7 @@
 #define U_DEG 3
 
 // declare an array of sensors
-# define NUM_SENSORS 2
+# define NUM_SENSORS 4
 AMS_AS5048B sensors[NUM_SENSORS];
 FlightSimFloat angles[NUM_SENSORS];
 
