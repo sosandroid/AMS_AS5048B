@@ -6,7 +6,7 @@
 
 // declare an array of sensors
 # define NUM_SENSORS 4
-AMS_AS5048B sensors[NUM_SENSORS];
+AMS_AS5048B sensors[NUM_SENSORS] = {AMS_AS5048B(0x40), AMS_AS5048B(0x41), AMS_AS5048B(0x42), AMS_AS5048B(0x43)};
 FlightSimFloat angles[NUM_SENSORS];
 
 void setup() {
@@ -15,7 +15,6 @@ void setup() {
   while (!Serial) ; //wait until Serial ready
   //init AMS_AS5048B objects, each with it's own address
   for(int i=0;i<NUM_SENSORS;i++){
-    sensors[i].chipAddress = 0x40+i;
     sensors[i].begin();
   }
 }
