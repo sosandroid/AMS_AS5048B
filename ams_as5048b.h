@@ -7,6 +7,7 @@
 
     v1.0 - First release
 	v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h)
+	v1.0.2 - Small bug fix and improvement by @DavidHowlett
 
     Library to interface the AS5048B magnetic rotary encoder from AMS over the I2C bus
 	
