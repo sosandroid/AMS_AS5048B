@@ -11,6 +11,7 @@
     v1.0.0 - First release
     v1.0.1 - Typo to allow compiling on Codebender.cc (Math.h vs math.h)
     v1.0.2 - setZeroReg() issue raised by @MechatronicsWorkman
+	v1.0.3 - Small bug fix and improvement by @DavidHowlett
 */
 /**************************************************************************/
 
