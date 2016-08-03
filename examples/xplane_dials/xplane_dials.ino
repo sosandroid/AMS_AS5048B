@@ -5,8 +5,9 @@
     @license  BSD (see license.txt)
 
     This example reads an array of 4 sensors and prints the results to serial.
-    This was originally developed to upload dial positions to a flight simulator called X-Plane
-    This uses a version of Arduino called Teensyduino that is specific
+    This was originally developed to upload dial positions to a flight simulator
+    called X-Plane using a modified version of Arduino called Teensyduino.
+    The Teensyduino specific code has now been commented out.
     If you want to enable the live upload of values to xplane you need to:
         - Download and install Teensyduino
         - Set the board type to Teensy++ 2.0 (or which ever version of Teensy you are using)
