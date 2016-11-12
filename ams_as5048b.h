@@ -1,8 +1,8 @@
 /**************************************************************************/
-/*! 
+/*!
     @file     ams_as5048b.h
     @author   SOSAndroid.fr (E. Ha.)
-	
+
     @section  HISTORY
 
     v1.0 - First release
@@ -10,7 +10,7 @@
 	v1.0.2 - Small bug fix and improvement by @DavidHowlett
 
     Library to interface the AS5048B magnetic rotary encoder from AMS over the I2C bus
-	
+
     @section LICENSE
 
     Software License Agreement (BSD License)
@@ -101,13 +101,13 @@ class AMS_AS5048B {
  public:
 	AMS_AS5048B(void);
 	AMS_AS5048B(uint8_t chipAddress);
-	
+
 	void		begin(void); // to init the object, must be called in the setup loop
 	void		toggleDebug(void); // start / stop debug through serial at anytime
 	void		setClockWise(boolean cw); //set clockwise counting, default is false (native sensor)
 	void		progRegister(uint8_t regVal); //nothing so far - manipulate the OTP register
-	void		doProg(void); //progress programming OTP (not implemented)
-	void		addressRegW(uint8_t regVal); //change the chip address (not implemented)
+	void		doProg(void); //progress programming OTP
+	void		addressRegW(uint8_t regVal); //change the chip address
 	uint8_t		addressRegR(void); //read chip address
 	void		setZeroReg(void); //set Zero to current angle position
 	void		zeroRegW(uint16_t regVal); //write Zero register value
@@ -115,14 +115,14 @@ class AMS_AS5048B {
 	uint16_t	angleRegR(void); //read raw value of the angle register
 	uint8_t		diagR(void); //read diagnostic register
 	uint16_t	magnitudeR(void); //read current magnitude
-	double		angleR(int unit, boolean newVal); //Read current angle or get last measure with unit conversion : RAW, TRN, DEG, RAD, GRAD, MOA, SOA, MILNATO, MILSE, MILRU	
+	double		angleR(int unit, boolean newVal); //Read current angle or get last measure with unit conversion : RAW, TRN, DEG, RAD, GRAD, MOA, SOA, MILNATO, MILSE, MILRU
 	uint8_t		getAutoGain(void);
 	uint8_t		getDiagReg(void);
 
 	void		updateMovingAvgExp(void); //measure the current angle and feed the Exponential Moving Average calculation
 	double		getMovingAvgExp(int unit); //get Exponential Moving Average calculation
 	void		resetMovingAvgExp(void); //reset Exponential Moving Average calculation values
-  
+
  private:
 	//variables
 	boolean		_debugFlag;
@@ -135,8 +135,8 @@ class AMS_AS5048B {
 	double		_movingAvgExpSin;
 	double		_movingAvgExpCos;
 	double		_movingAvgExpAlpha;
-	int			_movingAvgCountLoop;
-	
+	int		_movingAvgCountLoop;
+
 	//methods
 	uint8_t		readReg8(uint8_t address);
 	uint16_t	readReg16(uint8_t address); //16 bit value got from 2x8bits registers (7..0 MSB + 5..0 LSB) => 14 bits value

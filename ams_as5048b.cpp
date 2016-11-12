@@ -112,7 +112,7 @@ void AMS_AS5048B::setClockWise(boolean cw = true) {
 
 /**************************************************************************/
 /*!
-    @brief  writes OTP register - not done
+    @brief  writes OTP control register
 
     @params[in]
 				unit8_t register value
@@ -122,12 +122,13 @@ void AMS_AS5048B::setClockWise(boolean cw = true) {
 /**************************************************************************/
 void AMS_AS5048B::progRegister(uint8_t regVal) {
 
+	AMS_AS5048B::writeReg(AS5048B_PROG_REG, regVal);
 	return;
 }
 
 /**************************************************************************/
 /*!
-    @brief  Starts prog sequence according to datasheet - not done
+    @brief  Burn values to the OTP register
 
     @params[in]
 				none
@@ -137,12 +138,21 @@ void AMS_AS5048B::progRegister(uint8_t regVal) {
 /**************************************************************************/
 void AMS_AS5048B::doProg(void) {
 
+	//enable special programming mode
+	AMS_AS5048B::progRegister(0xFD);
+
+	//set the burn bit: enables automatic programming procedure
+	AMS_AS5048B::progRegister(0x08);
+
+	//disable special programming mode
+	AMS_AS5048B::progRegister(0x00);
+
 	return;
 }
 
 /**************************************************************************/
 /*!
-    @brief  write I2C address value (5 bits) into the address register - not done
+    @brief  write I2C address value (5 bits) into the address register
 
     @params[in]
 				unit8_t register value
@@ -152,7 +162,12 @@ void AMS_AS5048B::doProg(void) {
 /**************************************************************************/
 void AMS_AS5048B::addressRegW(uint8_t regVal) {
 
-	//AMS_AS5048B::writeReg(AS5048B_ADDR_REG, regVal)
+	// write the new chip address to the register
+	AMS_AS5048B::writeReg(AS5048B_ADDR_REG, regVal);
+
+	// update our chip address with our 5 programmable bits
+	// the MSB is internally inverted, so we flip the leftmost bit
+	_chipAddress = ((regVal << 2) | (_chipAddress & 0b11)) ^ (1 << 6);
 	return;
 }
 
@@ -377,10 +392,10 @@ uint8_t AMS_AS5048B::readReg8(uint8_t address) {
 	Wire.beginTransmission(_chipAddress);
 	Wire.write(address);
 	requestResult = Wire.endTransmission(false);
-    if (requestResult){
-        Serial.print("I2C error: ");
-        Serial.println(requestResult);
-    }
+	if (requestResult){
+		Serial.print("I2C error: ");
+		Serial.println(requestResult);
+	}
 
 	Wire.requestFrom(_chipAddress, nbByte2Read);
 	readValue = (uint8_t) Wire.read();
