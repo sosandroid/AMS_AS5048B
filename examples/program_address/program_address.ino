@@ -4,12 +4,12 @@
     @author   brentyi
     @license  BSD (see license.txt)
 
-	Example code for programming the i2c slave address
-	Be careful -- this can only be once once!
+	Example sketch for programming the i2c slave address
+	Be careful -- this can only be done once!
 
     @section  HISTORY
 
-    v1.0 - First release
+    v1.0.4 - Added address programming example
 */
 /**************************************************************************/
 

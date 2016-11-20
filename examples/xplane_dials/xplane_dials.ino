@@ -13,7 +13,7 @@
         - Set the board type to Teensy++ 2.0 (or which ever version of Teensy you are using)
         - Set the USB type to "Flight Sim Controls" in the tools menu (this adds some definitions)
         - Uncomment the marked lines
-    
+
 
     @section  HISTORY
 
@@ -32,7 +32,7 @@
 AMS_AS5048B sensors[NUM_SENSORS] = {AMS_AS5048B(0x40), AMS_AS5048B(0x41), AMS_AS5048B(0x42), AMS_AS5048B(0x43)};
 
 // the below line can be uncommented if you install Teensyduino
-//FlightSimFloat angles[NUM_SENSORS]; 
+//FlightSimFloat angles[NUM_SENSORS];
 
 void setup() {
     //Start serial
