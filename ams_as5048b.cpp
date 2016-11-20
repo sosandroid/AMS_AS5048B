@@ -140,12 +140,15 @@ void AMS_AS5048B::doProg(void) {
 
 	//enable special programming mode
 	AMS_AS5048B::progRegister(0xFD);
+	delay(10);
 
 	//set the burn bit: enables automatic programming procedure
 	AMS_AS5048B::progRegister(0x08);
+	delay(10);
 
 	//disable special programming mode
 	AMS_AS5048B::progRegister(0x00);
+	delay(10);
 
 	return;
 }
