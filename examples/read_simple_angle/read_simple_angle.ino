@@ -5,7 +5,7 @@
     @license  BSD (see license.txt)
 
 	read a simple angle from AS5048B over I2C bus
-	
+
     @section  HISTORY
 
     v1.0 - First release
@@ -33,13 +33,13 @@ void setup() {
 	//Start serial
 	Serial.begin(9600);
 	while (!Serial) ; //wait until Serial ready
-	
-	//Start Wire object. Unneeded here as this is done (optionnaly) by AMS_AS5048B object (see lib code - #define USE_WIREBEGIN_ENABLED)
+
+	//Start Wire object. Unneeded here as this is done (optionally) by the AMS_AS5048B object (see lib code - #define USE_WIREBEGIN_ENABLED)
 	//Wire.begin();
 
 	//init AMS_AS5048B object
 	mysensor.begin();
-	
+
 	//consider the current position as zero
 	mysensor.setZeroReg();
 
@@ -50,9 +50,9 @@ void loop() {
 	//print 2 times the exact same angle - only one measurement
 	Serial.print("Angle sensor raw : ");
 	Serial.println(mysensor.angleR(U_RAW, true), DEC);
-	
+
 	Serial.print("Angle degree : ");
 	Serial.println(mysensor.angleR(U_DEG, false), DEC);
-	
+
 	delay(2000);
 }

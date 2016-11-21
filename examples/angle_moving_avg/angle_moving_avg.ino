@@ -4,8 +4,8 @@
     @author   SOSAndroid (E. Ha.)
     @license  BSD (see license.txt)
 
-	read over I2C bus and averaging angle 
-	
+	read over I2C bus and averaging angle
+
     @section  HISTORY
 
     v1.0 - First release
@@ -35,36 +35,34 @@ void setup() {
 	//Start serial
 	Serial.begin(9600);
 	while (!Serial) ; //wait until Serial ready
-	
+
 	//Start Wire object. Unneeded here as this is done (optionnaly) by AMS_AS5048B object (see lib code - #define USE_WIREBEGIN_ENABLED)
 	//Wire.begin();
 
 	//init AMS_AS5048B object
 	mysensor.begin();
-	
-    //set clock wise counting
-    mysensor.setClockWise(true); 
-    
-    //set the 0 to the sensorr
-    //mysensor.zeroRegW(0x0);
-    
+
+	//set clock wise counting
+	mysensor.setClockWise(true); 
+
+	//set the 0 to the sensorr
+	//mysensor.zeroRegW(0x0);
+
 }
 
 void loop() {
-	
-    //prints to serial the read angle in degree and its average every 2 seconds
-	//prints 2 times the exact same angle - only one measurement
-    mysensor.updateMovingAvgExp();
 
-	
+	//prints to serial the read angle in degree and its average every 2 seconds
+	//prints 2 times the exact same angle - only one measurement
+	mysensor.updateMovingAvgExp();
+
+
 	Serial.print("Angle degree : ");
 	Serial.println(mysensor.angleR(U_DEG, false), DEC);
 
-    Serial.print("Average ");
-    Serial.println(mysensor.getMovingAvgExp(U_DEG), DEC);
+	Serial.print("Average ");
+	Serial.println(mysensor.getMovingAvgExp(U_DEG), DEC);
 
-        
-	
 	delay(2000);
 
 }
