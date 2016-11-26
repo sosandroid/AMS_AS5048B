@@ -104,7 +104,7 @@ class AMS_AS5048B {
 
 	void		begin(void); // to init the object, must be called in the setup loop
 	void		toggleDebug(void); // start / stop debug through serial at anytime
-	void		setClockWise(boolean cw); //set clockwise counting, default is false (native sensor)
+	void		setClockWise(boolean cw = true); //set clockwise counting, default is false (native sensor)
 	void		progRegister(uint8_t regVal); //nothing so far - manipulate the OTP register
 	void		doProg(void); //progress programming OTP
 	void		addressRegW(uint8_t regVal); //change the chip address
@@ -115,12 +115,12 @@ class AMS_AS5048B {
 	uint16_t	angleRegR(void); //read raw value of the angle register
 	uint8_t		diagR(void); //read diagnostic register
 	uint16_t	magnitudeR(void); //read current magnitude
-	double		angleR(int unit, boolean newVal); //Read current angle or get last measure with unit conversion : RAW, TRN, DEG, RAD, GRAD, MOA, SOA, MILNATO, MILSE, MILRU
+	double		angleR(int unit = U_RAW, boolean newVal = true); //Read current angle or get last measure with unit conversion : RAW, TRN, DEG, RAD, GRAD, MOA, SOA, MILNATO, MILSE, MILRU
 	uint8_t		getAutoGain(void);
 	uint8_t		getDiagReg(void);
 
 	void		updateMovingAvgExp(void); //measure the current angle and feed the Exponential Moving Average calculation
-	double		getMovingAvgExp(int unit); //get Exponential Moving Average calculation
+	double		getMovingAvgExp(int unit = U_RAW); //get Exponential Moving Average calculation
 	void		resetMovingAvgExp(void); //reset Exponential Moving Average calculation values
 
  private:
