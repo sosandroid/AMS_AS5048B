@@ -102,7 +102,7 @@ void AMS_AS5048B::toggleDebug(void) {
 				none
 */
 /**************************************************************************/
-void AMS_AS5048B::setClockWise(boolean cw = true) {
+void AMS_AS5048B::setClockWise(boolean cw) {
 
 	_clockWise = cw;
 	_lastAngleRaw = 0.0;
@@ -301,7 +301,7 @@ uint8_t AMS_AS5048B::getDiagReg(void) {
 				Double angle value converted into the desired unit
 */
 /**************************************************************************/
-double AMS_AS5048B::angleR(int unit = U_RAW, boolean newVal = true) {
+double AMS_AS5048B::angleR(int unit, boolean newVal) {
 
 	double angleRaw;
 
@@ -368,7 +368,7 @@ void AMS_AS5048B::updateMovingAvgExp(void) {
 				Double exponential moving averaged angle value
 */
 /**************************************************************************/
-double AMS_AS5048B::getMovingAvgExp(int unit = U_RAW) {
+double AMS_AS5048B::getMovingAvgExp(int unit) {
 
 	return AMS_AS5048B::convertAngle(unit, _movingAvgExpAngle);
 }
