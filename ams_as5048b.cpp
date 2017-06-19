@@ -128,7 +128,7 @@ void AMS_AS5048B::progRegister(uint8_t regVal) {
 
 /**************************************************************************/
 /*!
-    @brief  Burn values to the OTP register
+    @brief  Burn values to the slave address OTP register
 
     @params[in]
 				none
@@ -148,6 +148,41 @@ void AMS_AS5048B::doProg(void) {
 
 	//disable special programming mode
 	AMS_AS5048B::progRegister(0x00);
+	delay(10);
+
+	return;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Burn values to the zero position OTP register
+
+    @params[in]
+				none
+    @returns
+				none
+*/
+/**************************************************************************/
+void AMS_AS5048B::doProg(void) {
+	//this will burn the zero position OTP register like described in the datasheet
+	//enable programming mode
+	AMS_AS5048B::progRegister(0x01);
+	delay(10);
+
+	//set the burn bit: enables automatic programming procedure
+	AMS_AS5048B::progRegister(0x08);
+	delay(10);
+
+	//read angle information (equals to 0)
+	AMS_AS5048B::readReg16(AS5048B_ANGLMSB_REG);
+	delay(10);
+
+	//enable verification
+	AMS_AS5048B::progRegister(0x00);
+	delay(10);
+
+	//read angle information (equals to 0)
+	AMS_AS5048B::readReg16(AS5048B_ANGLMSB_REG);
 	delay(10);
 
 	return;
