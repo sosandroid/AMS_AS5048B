@@ -106,7 +106,8 @@ class AMS_AS5048B {
 	void		toggleDebug(void); // start / stop debug through serial at anytime
 	void		setClockWise(boolean cw = true); //set clockwise counting, default is false (native sensor)
 	void		progRegister(uint8_t regVal); //nothing so far - manipulate the OTP register
-	void		doProg(void); //progress programming OTP
+	void		doProg(void); //progress programming slave address OTP
+	void		doProgZero(void); //progress programming zero position OTP
 	void		addressRegW(uint8_t regVal); //change the chip address
 	uint8_t		addressRegR(void); //read chip address
 	void		setZeroReg(void); //set Zero to current angle position
