@@ -163,7 +163,7 @@ void AMS_AS5048B::doProg(void) {
 				none
 */
 /**************************************************************************/
-void AMS_AS5048B::doProg(void) {
+void AMS_AS5048B::doProgZero(void) {
 	//this will burn the zero position OTP register like described in the datasheet
 	//enable programming mode
 	AMS_AS5048B::progRegister(0x01);
