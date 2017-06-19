@@ -178,7 +178,7 @@ void AMS_AS5048B::doProgZero(void) {
 	delay(10);
 
 	//enable verification
-	AMS_AS5048B::progRegister(0x00);
+	AMS_AS5048B::progRegister(0x40);
 	delay(10);
 
 	//read angle information (equals to 0)
