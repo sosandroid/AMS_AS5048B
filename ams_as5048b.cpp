@@ -236,9 +236,9 @@ uint8_t AMS_AS5048B::addressRegR(void) {
 /**************************************************************************/
 void AMS_AS5048B::setZeroReg(void) {
 
+        AMS_AS5048B::zeroRegW((uint16_t) 0x00); //Issue closed by @MechatronicsWorkman and @oilXander. The last sequence avoids any offset for the new Zero position
 	uint16_t newZero = AMS_AS5048B::readReg16(AS5048B_ANGLMSB_REG);
-	AMS_AS5048B::zeroRegW((uint16_t) 0x00); //Issue closed by @MechatronicsWorkman
-	AMS_AS5048B::zeroRegW(newZero);
+        AMS_AS5048B::zeroRegW(newZero);
 	return;
 }
 
