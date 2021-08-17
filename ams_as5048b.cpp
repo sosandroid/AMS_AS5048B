@@ -449,16 +449,26 @@ uint16_t AMS_AS5048B::readReg16(uint8_t address) {
 	byte readArray[2];
 	uint16_t readValue = 0;
 
-	Wire.beginTransmission(_chipAddress);
-	Wire.write(address);
-	requestResult = Wire.endTransmission(false);
-	if (requestResult){
-		Serial.print("I2C error: ");
-		Serial.println(requestResult);
-	}
+#ifdef _VARIANT_ARDUINO_DUE_X_
+    requestResult = Wire.requestFrom((uint8_t) _chipAddress, nbByte2Read, address, 1, false);
+    if (requestResult == 0) {
+        Serial.print("I2C error: ");
+        Serial.println(requestResult);
+        // This needs to be fixed with an error code. 0 can be a valid register value.
+        return readValue;
+    }
+#else
+    Wire.beginTransmission(_chipAddress);
+    Wire.write(address);
+    requestResult = Wire.endTransmission(false);
+    if (requestResult) {
+        Serial.print("I2C error: ");
+        Serial.println(requestResult);
+    }
 
+    Wire.requestFrom(_chipAddress, nbByte2Read);
+#endif
 
-	Wire.requestFrom(_chipAddress, nbByte2Read);
 	for (byte i=0; i < nbByte2Read; i++) {
 		readArray[i] = Wire.read();
 	}
